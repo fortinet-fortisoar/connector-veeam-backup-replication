@@ -1,0 +1,1802 @@
+{
+  "name": "veeam-backup-replication",
+  "label": "Veeam Backup & Replication",
+  "description": "Veeam Backup & Replication is a data protection and disaster recovery solution that provides backup, recovery, and replication for virtual, physical, and cloud-based workloads.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "Other",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "resource",
+        "tooltip": "Public IPv4 address or DNS hostname of the machine where Veeam Backup & Replication is installed. ",
+        "description": "Public IPv4 address or DNS hostname of the machine where Veeam Backup & Replication is installed. "
+      },
+      {
+        "title": "Port",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "name": "port",
+        "value": 9419,
+        "tooltip": "Port is the REST API port number set during Veeam Backup & Replication installation. The default port number is 9419.",
+        "description": "Port is the REST API port number set during Veeam Backup & Replication installation. The default port number is 9419."
+      },
+      {
+        "title": "Username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username",
+        "tooltip": "Username used to access the Veeam Backup & Replication server.",
+        "description": "Username used to access the Veeam Backup & Replication server."
+      },
+      {
+        "title": "Password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password",
+        "tooltip": "Password used to access the Veeam Backup & Replication server.",
+        "description": "Password used to access the Veeam Backup & Replication server."
+      },
+      {
+        "title": "API Revision",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "api_revision",
+        "placeholder": "1.2-rev1",
+        "tooltip": "Version and revision of the Veeam Backup & Replication REST API. Must be in the following format: <version>-<revision>. e.g. 1.2-rev1",
+        "description": "Version and revision of the Veeam Backup & Replication REST API. Must be in the following format: <version>-<revision>. e.g. 1.2-rev1"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified.\nBy default, this option is selected, i.e., set to true."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_server_list",
+      "title": "Get Server List",
+      "description": "Retrieves a list of all servers and hosts added to the backup infrastructure based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_server_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Filter Mode",
+          "name": "filter_mode",
+          "type": "select",
+          "options": [
+            "Simple",
+            "Advanced"
+          ],
+          "onchange": {
+            "Simple": [
+              {
+                "title": "Platform",
+                "name": "platform",
+                "type": "Select",
+                "options": [
+                  "VMware",
+                  "Cloud Director"
+                ],
+                "onchange": {
+                  "VMware": [
+                    {
+                      "title": "Host Name",
+                      "name": "hostName",
+                      "type": "text",
+                      "tooltip": "Specify the name of the VMware vSphere server that hosts the object to filter results.",
+                      "description": "Specify the name of the VMware vSphere server that hosts the object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Name",
+                      "name": "name",
+                      "type": "text",
+                      "tooltip": "Specify the name of the VMware vSphere object to filter results.",
+                      "description": "Specify the name of the VMware vSphere object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Type",
+                      "name": "type",
+                      "type": "select",
+                      "options": [
+                        "Unknown",
+                        "Virtual Machine",
+                        "vCenter Server",
+                        "Data Center",
+                        "Cluster",
+                        "Host",
+                        "Resource Pool",
+                        "Folder",
+                        "Datastore",
+                        "Datastore Cluster",
+                        "Storage Policy",
+                        "Template",
+                        "Compute Resource",
+                        "Virtual App",
+                        "Tag",
+                        "Category",
+                        "Multi Tag",
+                        "Network",
+                        "DVS Network"
+                      ],
+                      "tooltip": "Select the type of the VMware vSphere object to filter results.",
+                      "description": "Select the type of the VMware vSphere object to filter results. You can select from the following options: \"Unknown\", \"Virtual Machine\", \"vCenter Server\", \"Data Center\", \"Cluster\", \"Host\", \"Resource Pool\", \"Folder\", \"Datastore\", \"Datastore Cluster\", \"Storage Policy\", \"Template\", \"Compute Resource\", \"Virtual App\", \"Tag\", \"Category\", \"Multi Tag\", \"Network\", \"DVS Network\"",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Object ID",
+                      "name": "objectId",
+                      "type": "text",
+                      "tooltip": "Specify the ID of the VMware vSphere object to filter results.",
+                      "description": "Specify the ID of the VMware vSphere object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    }
+                  ],
+                  "Cloud Director": [
+                    {
+                      "title": "Host Name",
+                      "name": "hostName",
+                      "type": "text",
+                      "tooltip": "Specify the name of the VMware Cloud Director server that hosts the object to filter results.",
+                      "description": "Specify the name of the VMware Cloud Director server that hosts the object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Name",
+                      "name": "name",
+                      "type": "text",
+                      "tooltip": "Specify the name of the VMware Cloud Director object to filter results.",
+                      "description": "Specify the name of the VMware Cloud Director object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Type",
+                      "name": "type",
+                      "type": "select",
+                      "options": [
+                        "Unknown",
+                        "Virtual Machine",
+                        "Cloud Director Server",
+                        "Organization",
+                        "Organization VDC",
+                        "vApp",
+                        "Storage Policy",
+                        "Network",
+                        "vCenter",
+                        "VM Template",
+                        "Datastore"
+                      ],
+                      "tooltip": "Select the type of the VMware Cloud Director object to filter results.",
+                      "description": "Select the type of the VMware Cloud Director object to filter results. You can select from the following options: \"Unknown\", \"Virtual Machine\", \"Cloud Director Server\", \"Organization\", \"Organization VDC\", \"vApp\", \"Storage Policy\", \"Network\", \"vCenter\", \"VM Template\", \"Datastore\"",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    },
+                    {
+                      "title": "Object ID",
+                      "name": "objectId",
+                      "type": "text",
+                      "tooltip": "Specify the ID of the VMware Cloud Director object to filter results.",
+                      "description": "Specify the ID of the VMware Cloud Director object to filter results.",
+                      "required": false,
+                      "editable": true,
+                      "visible": true
+                    }
+                  ]
+                },
+                "tooltip": "Select a platform type to return only results that match the given criteria.",
+                "description": "Select a platform type to return only results that match the given criteria. You can select from the following options: \"VMware\", \"Cloud Director\"",
+                "required": false,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Size",
+                "name": "size",
+                "type": "text",
+                "tooltip": "Specify a size to return only results that match the given criteria.",
+                "description": "Specify a size to return only results that match the given criteria.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Uniform Resource Name",
+                "name": "urn",
+                "type": "text",
+                "tooltip": "Specify a uniform resource name to return only results that match the given criteria.",
+                "description": "Specify a uniform resource name to return only results that match the given criteria.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Strict Match",
+                "name": "strict_match",
+                "type": "checkbox",
+                "value": false,
+                "tooltip": "Specifies whether to match exact value only.",
+                "description": "Specifies whether to match exact value only.\nBy default, this option is not selected, i.e., set to false.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ],
+            "Advanced": [
+              {
+                "title": "Filter",
+                "name": "filter",
+                "type": "json",
+                "tooltip": "Specify a filter, in JSON format, to return only results that match the given criteria.",
+                "description": "Specify a filter, in JSON format, to return only results that match the given criteria.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              }
+            ]
+          },
+          "tooltip": "Select how to input filter criteria: Simple (individual parameters) or Advanced (raw JSON filter).",
+          "description": "Select how to input filter criteria: Simple (individual parameters) or Advanced (raw JSON filter).",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "sort_by",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Property"
+          ],
+          "onchange": {
+            "Property": [
+              {
+                "title": "Property",
+                "name": "property",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "Platform",
+                  "Size",
+                  "Host Name",
+                  "Name",
+                  "Type",
+                  "Object ID",
+                  "Uniform Resource Name"
+                ],
+                "tooltip": "Property on which to sort the results",
+                "description": "Select the property on which to sort the results. You can select from the following options: \"Platform\", \"Size\", \"Host Name\", \"Name\", \"Type\", \"Object ID\", \"URN\""
+              },
+              {
+                "title": "Order",
+                "name": "direction",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "Ascending",
+                  "Descending"
+                ],
+                "value": "Ascending",
+                "tooltip": "Order in which to sort the results",
+                "description": "Select the order in which to sort the results. You can select from following options: Ascending(default) or Descending."
+              }
+            ]
+          },
+          "tooltip": "Sort result by property",
+          "description": "Sorts the results by the specified property and order the results."
+        },
+        {
+            "name": "skip",
+            "title": "Offset",
+            "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+            "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+            "type": "integer",
+            "value": 0,
+            "required": false,
+            "editable": true,
+            "visible": true
+        },
+        {
+            "name": "limit",
+            "title": "Limit",
+            "description": "Specify the number of results to return. The default value is 50.",
+            "tooltip": "Number of results to return. The default value is 50.",
+            "type": "integer",
+            "value": 50,
+            "required": false,
+            "editable": true,
+            "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_unstructured_data_server_list",
+      "title": "Get Unstructured Data Server List",
+      "description": "Retrieves a list of all unstructured data servers available on a backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_unstructured_data_server_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters unstructured data servers by the nameFilter pattern. The pattern can match any unstructured data server parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "description": "Filters unstructured data servers by the nameFilter pattern. The pattern can match any unstructured data server parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end. For reference: https://helpcenter.veeam.com/docs/backup/vbr_rest/filter.html?ver=120",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Name",
+            "Description"
+          ],
+          "value": "Name",
+          "tooltip": "Sorts unstructured data servers by one of the Unstructured Data Servers parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Name\", \"Description\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts unstructured data servers in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts unstructured data servers in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_microsoft_entra_id_tenant_list",
+      "title": "Get Microsoft Entra ID Tenant List",
+      "description": "Retrieves a list of all Microsoft Entra ID tenants added to the backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_microsoft_entra_id_tenant_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters Microsoft Entra ID tenants by the nameFilter pattern. The pattern can match any Microsoft Entra ID tenant parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "description": "Filters Microsoft Entra ID tenants by the nameFilter pattern. The pattern can match any Microsoft Entra ID tenant parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end. For reference: https://helpcenter.veeam.com/docs/backup/vbr_rest/filter.html?ver=120",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Name",
+            "Description"
+          ],
+          "value": "Name",
+          "tooltip": "Sorts Microsoft Entra ID tenants by one of the tenant parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Name\", \"Description\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts Microsoft Entra ID tenants in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts Microsoft Entra ID tenants in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "create_malware_event",
+      "title": "Create Malware Event",
+      "description": "Creates a new malware event based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "create_malware_event",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Detection Time",
+          "name": "detectionTimeUtc",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Select the detection date and time, in UTC.",
+          "description": "Select the detection date and time, in UTC."
+        },
+        {
+          "title": "Machine",
+          "name": "machine",
+          "type": "json",
+          "value": {
+            "fqdn": "Fully Qualified Domain Name of the machine.",
+            "ipv4": "IPv4 address of machine.",
+            "ipv6": "IPv6 address of the machine.",
+            "uuid": "BIOS UUID of the machine. Specify the UUID in the 8-4-4-4-12 format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx."
+          },
+          "tooltip": "Machine that you want to mark with the malware event. Specify at least 2 parameters.",
+          "description": "Machine that you want to mark with the malware event. Specify at least 2 parameters. Note that Veeam Backup & Replication can identify a machine by its FQDN, IPv4 address and IPv6 address only if the machine has been powered on during the backup. If you back up a powered-off machine, Veeam Backup & Replication will not get the machine IP addresses and domain name and will not be able to identify the machine.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Details",
+          "name": "details",
+          "type": "text",
+          "tooltip": "Specify the event description.",
+          "description": "Specify the event description.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Engine",
+          "name": "engine",
+          "type": "text",
+          "tooltip": "Specify the detection engine.",
+          "description": "Specify the detection engine.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_malware_event_list",
+      "title": "Get Malware Event List",
+      "description": "Retrieves a list of all malware events created on the backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_malware_event_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Start Time",
+          "name": "detectedAfterTimeUtcFilter",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Returns events created after the specified time, in UTC.",
+          "description": "Returns events created after the specified time, in UTC."
+        },
+        {
+          "title": "End Time",
+          "name": "detectedBeforeTimeUtcFilter",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Returns events created before the specified time, in UTC.",
+          "description": "Returns events created before the specified time, in UTC."
+        },
+        {
+          "title": "Event Type",
+          "name": "typeFilter",
+          "type": "select",
+          "options": [
+            "Unknown",
+            "Deleted Useful Files",
+            "Ransomware Notes",
+            "Malware Extensions",
+            "Encrypted Data",
+            "YARA Scan",
+            "Antivirus Scan",
+            "Renamed Files",
+            "Indicator of Compromise"
+          ],
+          "tooltip": "Select the type of the event to filter results.",
+          "description": "Select the type of the event to filter results. You can select from the following options: \"Unknown\", \"Deleted Useful Files\", \"Ransomware Notes\", \"Malware Extensions\", \"Encrypted Data\", \"YARA Scan\", \"Antivirus Scan\", \"Renamed Files\", \"Indicator of Compromise\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Event State",
+          "name": "stateFilter",
+          "type": "select",
+          "options": [
+            "Created",
+            "False Positive"
+          ],
+          "tooltip": "Select the state of the event to filter results.",
+          "description": "Select the state of the event to filter results. You can select from the following options: \"Created\", \"False Positive\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Event Severity",
+          "name": "severityFilter",
+          "type": "select",
+          "options": [
+            "Clean",
+            "Suspicious",
+            "Infected"
+          ],
+          "tooltip": "Select the severity of the event to filter results.",
+          "description": "Select the severity of the event to filter results. You can select from the following options: \"Clean\", \"Suspicious\", \"Infected\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Event Source",
+          "name": "sourceFilter",
+          "type": "select",
+          "options": [
+            "Manual",
+            "Internal Veeam Detector",
+            "External",
+            "Mark as Clean Event"
+          ],
+          "tooltip": "Select the source of the event to filter results.",
+          "description": "Select the source of the event to filter results. You can select from the following options: \"Manual\", \"Internal Veeam Detector\", \"External\", \"Mark as Clean Event\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Backup Object ID",
+          "name": "backupObjectIdFilter",
+          "type": "text",
+          "tooltip": "Filters events by backup object ID.",
+          "description": "Filters events by backup object ID.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Created By",
+          "name": "createdByFilter",
+          "type": "text",
+          "tooltip": "Filters events by the createdBy pattern. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "description": "Filters events by the createdBy pattern. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Engine",
+          "name": "engineFilter",
+          "type": "text",
+          "tooltip": "Filters events by the engine pattern. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "description": "Filters events by the engine pattern. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Type",
+            "Detection Time",
+            "Backup Object ID",
+            "State",
+            "Source",
+            "Severity",
+            "Created By",
+            "Engine"
+          ],
+          "value": "Severity",
+          "tooltip": "Sorts events by one of the event parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Type\", \"DetectionTimeUtc\", \"BackupObjectId\", \"State\", \"Source\", \"Severity\", \"CreatedBy\", \"Engine\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts events in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts events in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "scan_backup",
+      "title": "Scan Backups with Antivirus or YARA Rules",
+      "description": "Scans backups with antivirus or YARA rules based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "scan_backup",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Backup ID",
+          "name": "backupId",
+          "type": "text",
+          "tooltip": "Specify the ID of the backup.",
+          "description": "Specify the ID of the backup.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Backup Object ID",
+          "name": "backupObjectId",
+          "type": "text",
+          "tooltip": "Specify the ID of the backup object.",
+          "description": "Specify the ID of the backup object.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Scan Mode",
+          "name": "scanMode",
+          "type": "select",
+          "options": [
+            "Most Recent",
+            "All In Interval",
+            "First In Interval"
+          ],
+          "tooltip": "Select the backup scan mode.",
+          "description": "Select the backup scan mode. You can select from the following options: \"Most Recent\", \"All In Interval\", \"First In Interval\"",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Scan Engine",
+          "name": "scanEngine",
+          "type": "multiselect",
+          "options": [
+            "Antivirus Engine",
+            "YARA Rule"
+          ],
+          "onchange": {
+            "Yara Rule" : [
+              {
+                "title": "YARA Rule File Name",
+                "name": "fileName",
+                "type": "text",
+                "tooltip": "Specify the YARA rule file name.",
+                "description": "Specify the YARA rule file name.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              }
+            ]
+          },
+          "tooltip": "Select the type of backup scan engine.",
+          "description": "Select the type of backup scan engine. You can select from the following options: \"Antivirus Engine\", \"YARA Rule\"",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Custom Scan Range",
+          "name": "scanRange",
+          "type": "checkbox",
+          "value": false,
+          "onchange": {
+            "true" : [
+              {
+                "title": "From",
+                "name": "from",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Starting point of the backup scan range.",
+                "description": "Starting point of the backup scan range."
+              },
+              {
+                "title": "To",
+                "name": "to",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Ending point of the backup scan range.",
+                "description": "Ending point of the backup scan range."
+              }
+            ]
+          },
+          "tooltip": "Backup scan range. If you do not specify this parameter, Veeam Backup & Replication will scan all available restore points.",
+          "description": "Select to specify backup scan range. If you do not select this parameter, Veeam Backup & Replication will scan all available restore points.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Continue Scan",
+          "name": "continueScan",
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "If true, the backup scan will continue even after it finds affected restore points.",
+          "description": "If true, the backup scan will continue even after it finds affected restore points.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "start_security_compliance_analyzer",
+      "title": "Start Security & Compliance Analyzer",
+      "description": "Starts security & compliance analyzer on the backup server. ",
+      "category": "investigation",
+      "annotation": "start_security_compliance_analyzer",
+      "output_schema": {},
+      "parameters": [],
+      "enabled": true
+    },
+    {
+      "operation": "get_security_compliance_analyzer_results",
+      "title": "Get Security & Compliance Analyzer Results",
+      "description": "Retrieves best practices compliance result from the backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_security_compliance_analyzer_results",
+      "output_schema": {},
+      "parameters": [],
+      "enabled": true
+    },
+    {
+      "operation": "start_configuration_backup",
+      "title": "Start Configuration Backup",
+      "description": "Starts configuration backup.",
+      "category": "investigation",
+      "annotation": "start_configuration_backup",
+      "output_schema": {},
+      "parameters": [],
+      "enabled": true
+    },
+    {
+      "operation": "get_managed_server_list",
+      "title": "Get Managed Server List",
+      "description": "Retrieves a list of all servers that are added to the backup infrastructure based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_managed_server_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters servers by the nameFilter pattern. The pattern can match any server parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "description": "Filters servers by the nameFilter pattern. The pattern can match any server parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end. For reference: https://helpcenter.veeam.com/docs/backup/vbr_rest/filter.html?ver=120",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Server Type",
+          "name": "typeFilter",
+          "type": "select",
+          "options": [
+            "Windows Host",
+            "Linux Host",
+            "Vi Host",
+            "Cloud Director Host"
+          ],
+          "tooltip": "Select the type of the server to filter results.",
+          "description": "Select the type of the server to filter results. You can select from the following options: \"Windows Host\", \"Linux Host\", \"Vi Host\", \"Cloud Director Host\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Vi Type",
+          "name": "viTypeFilter",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ESX",
+            "ESXi",
+            "VC"
+          ],
+          "tooltip": "Select the type of the VMware vSphere server to filter results.",
+          "description": "Select the type of the VMware vSphere server to filter results. You can select from the following options: \"ESX\", \"ESXi\", \"VC\""
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Name",
+            "Type",
+            "Description"
+          ],
+          "value": "Name",
+          "tooltip": "Sorts unstructured data servers by one of the Unstructured Data Servers parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Name\", \"Type\", \"Description\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts unstructured data servers in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts unstructured data servers in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "start_instant_recovery",
+      "title": "Start Instant Recovery",
+      "description": "Starts instant recovery of a VMware vSphere VM to VMware vSphere. You can recover a VM from the specified restore point to the original location with initial VM settings, or to any location but with different settings. ",
+      "category": "investigation",
+      "annotation": "start_instant_recovery",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Restore Point ID",
+          "name": "restorePointId",
+          "type": "text",
+          "tooltip": "Specify the ID of the restore point.",
+          "description": "Specify the ID of the restore point.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Restore Mode",
+          "name": "type",
+          "type": "select",
+          "options": [
+            "Original Location",
+            "Customized"
+          ],
+          "onchange": {
+            "Customized": [
+              {
+                "title": "Datastore",
+                "name": "datastore",
+                "type": "json",
+                "tooltip": "Datastore that keeps redo logs with changes that take place while a VM is running from a backup.",
+                "description": "Datastore that keeps redo logs with changes that take place while a VM is running from a backup.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Destination",
+                "name": "destination",
+                "type": "json",
+                "tooltip": "Destination where the recovered VM resides.",
+                "description": "Destination where the recovered VM resides. ",
+                "required": false,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Overwrite",
+                "name": "overwrite",
+                "type": "checkbox",
+                "value": false,
+                "tooltip": "If true, Veeam Backup & Replication overwrites the existing VM that has the same name.",
+                "description": "If true, Veeam Backup & Replication overwrites the existing VM that has the same name.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ]
+          },
+          "tooltip": "Select the restore mode.",
+          "description": "Select the restore mode. You can select from the following options: \"Original Location\", \"Customized\"",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Enable Antivirus Scan",
+          "name": "antivirusScanEnabled",
+          "type": "checkbox",
+          "value": true,
+          "onchange": {
+            "true" : [
+              {
+                "title": "virusDetectionAction",
+                "name": "virusDetectionAction",
+                "type": "select",
+                "options": [
+                  "Disable Network",
+                  "Abort Recovery",
+                  "Ignore"
+                ],
+                "tooltip": "Action that Veeam Backup & Replication takes if the antivirus software finds a threat.",
+                "description": "Action that Veeam Backup & Replication takes if the antivirus software finds a threat. You can select from the following options: \"Disable Network\", \"Abort Recovery\", \"Ignore\"",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Enable Entire Volume Scan",
+                "name": "entireVolumeScanEnabled",
+                "type": "checkbox",
+                "value": true,
+                "tooltip": "If true, the antivirus continues machine scan after the first malware is found.",
+                "description": "If true, the antivirus continues machine scan after the first malware is found.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ]
+          },
+          "tooltip": "If true, Veeam Backup & Replication scans machine data with antivirus software before restoring the machine to the production environment.",
+          "description": "If true, Veeam Backup & Replication scans machine data with antivirus software before restoring the machine to the production environment.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Restore VM Tags",
+          "name": "vmTagsRestoreEnabled",
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, Veeam Backup & Replication restores tags that were assigned to the original VM, and assign them to the restored VM.",
+          "description": "If true, Veeam Backup & Replication restores tags that were assigned to the original VM, and assign them to the restored VM.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Enable NICs",
+          "name": "nicsEnabled",
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, the restored VM is connected to the network.",
+          "description": "If true, the restored VM is connected to the network.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Power Up",
+          "name": "powerUp",
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, Veeam Backup & Replication powers on the restored VM on the target host.",
+          "description": "If true, Veeam Backup & Replication powers on the restored VM on the target host.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Reason",
+          "name": "reason",
+          "type": "text",
+          "tooltip": "Reason for restoring the VM.",
+          "description": "Specify the reason for restoring the VM.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "start_quick_backup",
+      "title": "Start Quick Backup",
+      "description": "Starts quick backup for the specified VMware vSphere or VMware Cloud Director VM.",
+      "category": "investigation",
+      "annotation": "start_quick_backup",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Platform",
+          "name": "platform",
+          "type": "Select",
+          "options": [
+            "VMware",
+            "Cloud Director"
+          ],
+          "onchange": {
+            "VMware": [
+              {
+                "title": "Host Name",
+                "name": "hostName",
+                "type": "text",
+                "tooltip": "Specify the name of the VMware vSphere server that hosts the object.",
+                "description": "Specify the name of the VMware vSphere server that hosts the object.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Name",
+                "name": "name",
+                "type": "text",
+                "tooltip": "Specify the name of the VMware vSphere object.",
+                "description": "Specify the name of the VMware vSphere object.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Type",
+                "name": "type",
+                "type": "select",
+                "options": [
+                  "Unknown",
+                  "Virtual Machine",
+                  "vCenter Server",
+                  "Data Center",
+                  "Cluster",
+                  "Host",
+                  "Resource Pool",
+                  "Folder",
+                  "Datastore",
+                  "Datastore Cluster",
+                  "Storage Policy",
+                  "Template",
+                  "Compute Resource",
+                  "Virtual App",
+                  "Tag",
+                  "Category",
+                  "Multi Tag",
+                  "Network",
+                  "DVS Network"
+                ],
+                "tooltip": "Select the type of the VMware vSphere object.",
+                "description": "Select the type of the VMware vSphere object. You can select from the following options: \"Unknown\", \"Virtual Machine\", \"vCenter Server\", \"Data Center\", \"Cluster\", \"Host\", \"Resource Pool\", \"Folder\", \"Datastore\", \"Datastore Cluster\", \"Storage Policy\", \"Template\", \"Compute Resource\", \"Virtual App\", \"Tag\", \"Category\", \"Multi Tag\", \"Network\", \"DVS Network\"",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Object ID",
+                "name": "objectId",
+                "type": "text",
+                "tooltip": "Specify the ID of the VMware vSphere object.",
+                "description": "Specify the ID of the VMware vSphere object.",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ],
+            "Cloud Director": [
+              {
+                "title": "Host Name",
+                "name": "hostName",
+                "type": "text",
+                "tooltip": "Specify the name of the VMware Cloud Director server that hosts the object.",
+                "description": "Specify the name of the VMware Cloud Director server that hosts the object.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Name",
+                "name": "name",
+                "type": "text",
+                "tooltip": "Specify the name of the VMware Cloud Director object.",
+                "description": "Specify the name of the VMware Cloud Director object.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Type",
+                "name": "type",
+                "type": "select",
+                "options": [
+                  "Unknown",
+                  "Virtual Machine",
+                  "Cloud Director Server",
+                  "Organization",
+                  "Organization VDC",
+                  "vApp",
+                  "Storage Policy",
+                  "Network",
+                  "vCenter",
+                  "VM Template",
+                  "Datastore"
+                ],
+                "tooltip": "Select the type of the VMware Cloud Director object.",
+                "description": "Select the type of the VMware Cloud Director object. You can select from the following options: \"Unknown\", \"Virtual Machine\", \"Cloud Director Server\", \"Organization\", \"Organization VDC\", \"vApp\", \"Storage Policy\", \"Network\", \"vCenter\", \"VM Template\", \"Datastore\"",
+                "required": true,
+                "editable": true,
+                "visible": true
+              },
+              {
+                "title": "Object ID",
+                "name": "objectId",
+                "type": "text",
+                "tooltip": "Specify the ID of the VMware Cloud Director object.",
+                "description": "Specify the ID of the VMware Cloud Director object.",
+                "required": true,
+                "editable": true,
+                "visible": true
+              }
+            ]
+          },
+          "tooltip": "Select a platform type.",
+          "description": "Select a platform type. You can select from the following options: \"VMware\", \"Cloud Director\"",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Size",
+          "name": "size",
+          "type": "text",
+          "tooltip": "Specify the object size.",
+          "description": "Specify the object size.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Uniform Resource Name",
+          "name": "urn",
+          "type": "text",
+          "tooltip": "Specify a uniform resource name.",
+          "description": "Specify a uniform resource name.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_backup_list",
+      "title": "Get Backup List",
+      "description": "Retrieves a list of all backups that are created on or imported to the backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_backup_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters backups by the nameFilter pattern. The pattern can match any backup parameter. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "description": "Filters backups by the nameFilter pattern. The pattern can match any backup parameter. To substitute one or more characters, use the asterisk (*) character at the beginning, at the end or both.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Created After",
+          "name": "createdAfterFilter",
+          "type": "datetime",
+          "tooltip": "Returns backups that are created after the specified date and time.",
+          "description": "Returns backups that are created after the specified date and time.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Created Before",
+          "name": "createdBeforeFilter",
+          "type": "datetime",
+          "tooltip": "Returns backups that are created before the specified date and time.",
+          "description": "Returns backups that are created before the specified date and time.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Platform ID",
+          "name": "platformIdFilter",
+          "type": "text",
+          "tooltip": "Filters backups by ID of the backup object platform.",
+          "description": "Filters backups by ID of the backup object platform.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Job ID",
+          "name": "jobIdFilter",
+          "type": "text",
+          "tooltip": "Filters backups by ID of the parent job.",
+          "description": "Filters backups by ID of the parent job.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Policy Tag",
+          "name": "policyTagFilter",
+          "type": "text",
+          "tooltip": "Filters backups by retention policy tag.",
+          "description": "Filters backups by retention policy tag.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Name",
+            "Creation Time",
+            "Platform ID",
+            "Job ID",
+            "Policy Tag"
+          ],
+          "value": "Name",
+          "tooltip": "Sorts backups by one of the backup parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Name\", \"Creation Time\", \"Platform ID\", \"Job ID\", \"Policy Tag\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts backups in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts backups in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_repository_state_list",
+      "title": "Get Repository State List",
+      "description": "Retrieves a list of all repository states. The states include repository location and brief statistics, such as repository capacity, free and used space based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_repository_state_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "name": "idFilter",
+          "type": "text",
+          "tooltip": "Filters repository states by repository ID.",
+          "description": "Filters repository states by repository ID.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters repository states by the nameFilter pattern. The pattern can match any repository state parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "description": "Filters repository states by the nameFilter pattern. The pattern can match any repository state parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Repository Type",
+          "name": "typeFilter",
+          "type": "select",
+          "options": [
+            "Win Local",
+            "Linux Local",
+            "Smb",
+            "Nfs",
+            "Azure Blob",
+            "Azure Data Box",
+            "Azure Archive",
+            "Amazon S3",
+            "Amazon Snowball Edge",
+            "Amazon S3 Glacier",
+            "S3 Compatible",
+            "Google Cloud",
+            "IBM Cloud",
+            "Extendable Repository",
+            "DD Boost",
+            "ExaGrid",
+            "HP Store Once Integration",
+            "Quantum",
+            "Wasabi Cloud",
+            "Linux Hardened",
+            "Infinidat",
+            "Fujitsu"
+          ],
+          "tooltip": "Select the type of the repository to filter results.",
+          "description": "Select the type of the repository to filter results. You can select from the following options: \"Win Local\" \"Linux Local\" \"Smb\" \"Nfs\" \"Azure Blob\" \"Azure Data Box\" \"Azure Archive\" \"Amazon S3\" \"Amazon Snowball Edge\" \"Amazon S3 Glacier\" \"S3 Compatible\" \"Google Cloud\" \"IBM Cloud\" \"Extendable Repository\" \"DD Boost\" \"ExaGrid\" \"HP Store Once Integration\" \"Quantum\" \"Wasabi Cloud\" \"Linux Hardened\" \"Infinidat\" \"Fujitsu\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Repository Capacity",
+          "name": "capacityFilter",
+          "type": "decimal",
+          "tooltip": "Filters repository states by repository capacity.",
+          "description": "Filters repository states by repository capacity.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Repository Free Space",
+          "name": "freeSpaceFilter",
+          "type": "decimal",
+          "tooltip": "Filters repository states by repository free space.",
+          "description": "Filters repository states by repository free space.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Repository Used Space",
+          "name": "usedSpaceFilter",
+          "type": "decimal",
+          "tooltip": "Filters repository states by repository used space.",
+          "description": "Filters repository states by repository used space.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Is Online",
+          "name": "isOnlineFilter",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "Filters repository states by repository connection status.",
+          "description": "Filters repository states by repository connection status."
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Name",
+            "Type",
+            "Host",
+            "Path",
+            "Capacity",
+            "Free",
+            "Used Space",
+            "Description"
+          ],
+          "value": "Name",
+          "tooltip": "Sorts repository states by one of the state parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Name\" \"Type\" \"Host\" \"Path\" \"Capacity\" \"Free\" \"Used Space\" \"Description\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts repository states in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts repository states in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_restore_point_list",
+      "title": "Get Restore Point List",
+      "description": "Retrieves a list of all restore points created on the backup server based on the input parameters that you have specified. ",
+      "category": "investigation",
+      "annotation": "get_restore_point_list",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Name Filter",
+          "name": "nameFilter",
+          "type": "text",
+          "tooltip": "Filters restore points by the nameFilter pattern. The pattern can match any restore point parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "description": "Filters restore points by the nameFilter pattern. The pattern can match any restore point parameter. To substitute one or more characters, use the asterisk (*) character at the beginning and/or at the end.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Created After",
+          "name": "createdAfterFilter",
+          "type": "datetime",
+          "tooltip": "Returns restore points that are created after the specified date and time.",
+          "description": "Returns restore points that are created after the specified date and time.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Created Before",
+          "name": "createdBeforeFilter",
+          "type": "datetime",
+          "tooltip": "Returns restore points that are created before the specified date and time.",
+          "description": "Returns restore points that are created before the specified date and time.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Platform ID",
+          "name": "platformIdFilter",
+          "type": "text",
+          "tooltip": "Filters restore points by ID of the backup object platform.",
+          "description": "Filters restore points by ID of the backup object platform.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Backup ID",
+          "name": "backupIdFilter",
+          "type": "text",
+          "tooltip": "Filters restore points by backup ID.",
+          "description": "Filters restore points by backup ID.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Backup Object ID",
+          "name": "backupObjectIdFilter",
+          "type": "text",
+          "tooltip": "Filters restore points by backup object ID.",
+          "description": "Filters restore points by backup object ID.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Platform Name",
+          "name": "platformNameFilter",
+          "type": "select",
+          "options": [
+            "VMware",
+            "HyperV",
+            "CloudDirector",
+            "WindowsPhysical",
+            "LinuxPhysical",
+            "Tape",
+            "CustomPlatform",
+            "EntraID",
+            "UnstructuredData",
+            "Test"
+          ],
+          "tooltip": "Select the name of the platform to filter results.",
+          "description": "Select the name of the platform to filter results. You can select from the following options: \"VMware\" \"HyperV\" \"Cloud Director\" \"Windows Physical\" \"Linux Physical\" \"Tape\" \"Custom Platform\" \"Entra ID\" \"Unstructured Data\" \"Test\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Malware Status",
+          "name": "malwareStatusFilter",
+          "type": "select",
+          "options": [
+            "Clean",
+            "Suspicious",
+            "Infected"
+          ],
+          "tooltip": "Select the status of the malware to filter results.",
+          "description": "Select the status of the malware to filter results. You can select from the following options: \"Clean\" \"Suspicious\" \"Infected\"",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Sort By",
+          "name": "orderColumn",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Creation Time",
+            "Platform ID",
+            "Backup ID"
+          ],
+          "value": "Creation Time",
+          "tooltip": "Sorts restore points by one of the restore point parameters.",
+          "description": "Select the parameter on which to sort the results. You can select from the following options: \"Creation Time\" \"Platform ID\" \"Backup ID\""
+        },
+        {
+          "title": "Order Ascending",
+          "name": "orderAsc",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": true,
+          "tooltip": "If true, sorts restore points in the ascending order by the Sort By parameter.",
+          "description": "If true, sorts restore points in the ascending order by the Sort By parameter."
+        },
+        {
+          "name": "skip",
+          "title": "Offset",
+          "description": "Specify the count of the first few records to skip while retrieving the result. The default value is 0.",
+          "tooltip": "Count of records to skip while retrieving the result. The default value is 0.",
+          "type": "integer",
+          "value": 0,
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "name": "limit",
+          "title": "Limit",
+          "description": "Specify the number of results to return. The default value is 50.",
+          "tooltip": "Number of results to return. The default value is 50.",
+          "type": "integer",
+          "value": 50,
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "execute_an_api_request",
+      "title": "Execute an API Request",
+      "annotation": "execute_an_api_request",
+      "description": "Sends an API request to any Veeam Backup & Replication API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs. ",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "method",
+          "title": "HTTP Method",
+          "type": "select",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Select an HTTP action for the request. You can select from the following options:  \n\nDELETE \n\nGET \n\nPATCH \n\nPOST \n\nPUT ",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "title": "Endpoint",
+          "name": "endpoint",
+          "tooltip": "Specify the target API URL path for example: backups",
+          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/backups, the endpoint would be backups. ",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Query Parameters",
+          "name": "query_params",
+          "description": "(Optional) Specify any optional parameters to add to the URL and refine the request. ",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "name": "payload",
+          "title": "Request Payload",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "description": "(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests). "
+        }
+      ],
+      "output_schema": {}
+    }
+  ]
+}
+
