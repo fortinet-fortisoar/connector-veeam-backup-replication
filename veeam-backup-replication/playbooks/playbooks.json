@@ -551,7 +551,7 @@
             {
               "uuid": "53658a3f-db69-4a4f-9fed-17d07489015f",
               "@type": "WorkflowStep",
-              "name": "Start Security & Compliance Analyzer",
+              "name": "Start Security Compliance Analyzer",
               "description": null,
               "status": null,
               "arguments": {
@@ -628,7 +628,7 @@
             {
               "uuid": "1788369e-1392-4cad-94ba-07a1013347c2",
               "@type": "WorkflowStep",
-              "name": "Get Security & Compliance Analyzer Results",
+              "name": "Get Security Compliance Analyzer Results",
               "description": null,
               "status": null,
               "arguments": {
