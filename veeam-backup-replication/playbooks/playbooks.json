@@ -574,7 +574,7 @@
               "uuid": "bd2ceb8a-0cb5-4c73-b080-c8bf1a287ea0",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Start Security & Compliance Analyzer",
+              "name": "Start-> Start Security Compliance Analyzer",
               "sourceStep": "/api/3/workflow_steps/12065705-854f-4a21-b03d-9fd595f0aef3",
               "targetStep": "/api/3/workflow_steps/53658a3f-db69-4a4f-9fed-17d07489015f"
             }
@@ -651,7 +651,7 @@
               "uuid": "d829b817-d9ad-4a98-a702-0eb3d10d2d7d",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Get Security & Compliance Analyzer Results",
+              "name": "Start-> Get Security Compliance Analyzer Results",
               "sourceStep": "/api/3/workflow_steps/a1504f22-2a0f-429d-b365-48c9dbfeffcd",
               "targetStep": "/api/3/workflow_steps/1788369e-1392-4cad-94ba-07a1013347c2"
             }
