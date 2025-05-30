@@ -6,7 +6,7 @@
   "cs_approved": true,
   "cs_compatible": true,
   "version": "1.0.0",
-  "category": "Other",
+  "category": "Storage",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "help_online": "",
@@ -98,7 +98,7 @@
               {
                 "title": "Platform",
                 "name": "platform",
-                "type": "Select",
+                "type": "select",
                 "options": [
                   "VMware",
                   "Cloud Director"
@@ -784,7 +784,7 @@
             "YARA Rule"
           ],
           "onchange": {
-            "Yara Rule" : [
+            "YARA Rule" : [
               {
                 "title": "YARA Rule File Name",
                 "name": "fileName",
@@ -1148,7 +1148,7 @@
         {
           "title": "Platform",
           "name": "platform",
-          "type": "Select",
+          "type": "select",
           "options": [
             "VMware",
             "Cloud Director"
