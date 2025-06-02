@@ -1,0 +1,1305 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "a2194e5c-41c0-4c94-be07-6421c49ebe37",
+      "@type": "WorkflowCollection",
+      "name": "Sample - Veeam Backup & Replication - 1.0.0",
+      "description": "Veeam Backup & Replication is a data protection and disaster recovery solution that provides backup, recovery, and replication for virtual, physical, and cloud-based workloads.",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Veeam",
+        "veeam-backup-replication"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "9c808238-c821-42e5-9395-b01500470ef8",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all servers and hosts added to the backup infrastructure based on the input parameters that you have specified. ",
+          "name": "Get Server List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f26c13ce-a60b-4e80-8325-b8207f7a25b5",
+          "steps": [
+            {
+              "uuid": "f26c13ce-a60b-4e80-8325-b8207f7a25b5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "2b895728-b786-47e9-827e-45f3b66f55d2",
+                "title": "Veeam Backup & Replication: Get Server List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "fc755d8c-9622-4a4e-8993-8adafccba748",
+              "@type": "WorkflowStep",
+              "name": "Get Server List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_server_list",
+                "operationTitle": "Get Server List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ff44b45d-b8e8-4fb3-aaa2-3eb108dbc3e5",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Server List",
+              "sourceStep": "/api/3/workflow_steps/f26c13ce-a60b-4e80-8325-b8207f7a25b5",
+              "targetStep": "/api/3/workflow_steps/fc755d8c-9622-4a4e-8993-8adafccba748"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a5f5deab-e935-400d-911b-5fe404086bee",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all unstructured data servers available on a backup server based on the input parameters that you have specified. ",
+          "name": "Get Unstructured Data Server List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/04ac09ad-733b-49dc-8704-448db3ad55f2",
+          "steps": [
+            {
+              "uuid": "04ac09ad-733b-49dc-8704-448db3ad55f2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c839bd36-316f-4bdf-85dc-1b1780dd2f70",
+                "title": "Veeam Backup & Replication: Get Unstructured Data Server List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "5564996d-df30-4402-809a-93024eeba8fe",
+              "@type": "WorkflowStep",
+              "name": "Get Unstructured Data Server List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Name",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_unstructured_data_server_list",
+                "operationTitle": "Get Unstructured Data Server List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2dce3f7f-b0a3-48c7-99a2-e5c1e9a5a10a",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Unstructured Data Server List",
+              "sourceStep": "/api/3/workflow_steps/04ac09ad-733b-49dc-8704-448db3ad55f2",
+              "targetStep": "/api/3/workflow_steps/5564996d-df30-4402-809a-93024eeba8fe"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "2d58eb2b-d9df-4ad2-9dd3-c935a26cdcf1",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all Microsoft Entra ID tenants added to the backup server based on the input parameters that you have specified. ",
+          "name": "Get Microsoft Entra ID Tenant List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0afdfb82-b944-47cd-9bfb-243f14191033",
+          "steps": [
+            {
+              "uuid": "0afdfb82-b944-47cd-9bfb-243f14191033",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "dad06e10-2104-47ec-87a7-83aeae1f4d54",
+                "title": "Veeam Backup & Replication: Get Microsoft Entra ID Tenant List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "d6afe72b-c42b-4d0e-bd34-f4db2137979d",
+              "@type": "WorkflowStep",
+              "name": "Get Microsoft Entra ID Tenant List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Name",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_microsoft_entra_id_tenant_list",
+                "operationTitle": "Get Microsoft Entra ID Tenant List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "eb8b3b1c-0542-46cc-accb-46efec13ce2a",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Microsoft Entra ID Tenant List",
+              "sourceStep": "/api/3/workflow_steps/0afdfb82-b944-47cd-9bfb-243f14191033",
+              "targetStep": "/api/3/workflow_steps/d6afe72b-c42b-4d0e-bd34-f4db2137979d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c5d47350-903d-43f9-a08f-32e67157eb97",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Creates a new malware event based on the input parameters that you have specified. ",
+          "name": "Create Malware Event",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/eed93ac2-818e-4805-9e44-e12ecf33b1c5",
+          "steps": [
+            {
+              "uuid": "eed93ac2-818e-4805-9e44-e12ecf33b1c5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a871c607-7483-48da-a191-db4c139a9658",
+                "title": "Veeam Backup & Replication: Create Malware Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "14cc6835-65e8-4b5f-99b3-abe247df75b3",
+              "@type": "WorkflowStep",
+              "name": "Create Malware Event",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "machine": {
+                    "fqdn": "Fully Qualified Domain Name of the machine.",
+                    "ipv4": "IPv4 address of machine.",
+                    "ipv6": "IPv6 address of the machine.",
+                    "uuid": "BIOS UUID of the machine. Specify the UUID in the 8-4-4-4-12 format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx."
+                  }
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "create_malware_event",
+                "operationTitle": "Create Malware Event"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "58e90a88-43ef-4728-9a05-953b5425857b",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Malware Event",
+              "sourceStep": "/api/3/workflow_steps/eed93ac2-818e-4805-9e44-e12ecf33b1c5",
+              "targetStep": "/api/3/workflow_steps/14cc6835-65e8-4b5f-99b3-abe247df75b3"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1fc588c6-1b19-44a9-9b9e-60e55992e2fe",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all malware events created on the backup server based on the input parameters that you have specified. ",
+          "name": "Get Malware Event List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7429a4fe-a66a-4941-81bf-fd8520c8529d",
+          "steps": [
+            {
+              "uuid": "7429a4fe-a66a-4941-81bf-fd8520c8529d",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "e4370c84-6e99-4604-b74e-73a4729a8dfd",
+                "title": "Veeam Backup & Replication: Get Malware Event List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "3fb6c1db-86e0-48d3-bafa-f27c48ac0004",
+              "@type": "WorkflowStep",
+              "name": "Get Malware Event List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Severity",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_malware_event_list",
+                "operationTitle": "Get Malware Event List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "4ff6221b-0b07-4b96-b843-f1655d605d34",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Malware Event List",
+              "sourceStep": "/api/3/workflow_steps/7429a4fe-a66a-4941-81bf-fd8520c8529d",
+              "targetStep": "/api/3/workflow_steps/3fb6c1db-86e0-48d3-bafa-f27c48ac0004"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "21e8c5c0-2a5f-46cd-8b9b-e176c562e774",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Scans backups with antivirus or YARA rules based on the input parameters that you have specified. ",
+          "name": "Scan Backups with Antivirus or YARA Rules",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c1d6eb14-14be-46ef-b32d-7dcf2bdc8119",
+          "steps": [
+            {
+              "uuid": "c1d6eb14-14be-46ef-b32d-7dcf2bdc8119",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "43c7ef19-be76-4c8c-88ad-32663e246d3b",
+                "title": "Veeam Backup & Replication: Scan Backups with Antivirus or YARA Rules",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "c6ca04ad-ad84-421c-83f2-15f2ecc692dd",
+              "@type": "WorkflowStep",
+              "name": "Scan Backups with Antivirus or YARA Rules",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "scanRange": false,
+                  "continueScan": false
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "scan_backup",
+                "operationTitle": "Scan Backups with Antivirus or YARA Rules"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "db59b233-ad54-4b98-9436-96e62438ba9e",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Scan Backups with Antivirus or YARA Rules",
+              "sourceStep": "/api/3/workflow_steps/c1d6eb14-14be-46ef-b32d-7dcf2bdc8119",
+              "targetStep": "/api/3/workflow_steps/c6ca04ad-ad84-421c-83f2-15f2ecc692dd"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "766130d2-a8bf-4b2b-93c4-cb13598278bc",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Starts security & compliance analyzer on the backup server. ",
+          "name": "Start Security & Compliance Analyzer",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/12065705-854f-4a21-b03d-9fd595f0aef3",
+          "steps": [
+            {
+              "uuid": "12065705-854f-4a21-b03d-9fd595f0aef3",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a84f453a-dfc8-4c0c-bd4f-9247c7de4a9c",
+                "title": "Veeam Backup & Replication: Start Security & Compliance Analyzer",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "53658a3f-db69-4a4f-9fed-17d07489015f",
+              "@type": "WorkflowStep",
+              "name": "Start Security Compliance Analyzer",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "start_security_compliance_analyzer",
+                "operationTitle": "Start Security & Compliance Analyzer"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "bd2ceb8a-0cb5-4c73-b080-c8bf1a287ea0",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Start Security Compliance Analyzer",
+              "sourceStep": "/api/3/workflow_steps/12065705-854f-4a21-b03d-9fd595f0aef3",
+              "targetStep": "/api/3/workflow_steps/53658a3f-db69-4a4f-9fed-17d07489015f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f9004729-f116-4230-b23e-55ec9ec9ca09",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves best practices compliance result from the backup server based on the input parameters that you have specified. ",
+          "name": "Get Security & Compliance Analyzer Results",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a1504f22-2a0f-429d-b365-48c9dbfeffcd",
+          "steps": [
+            {
+              "uuid": "a1504f22-2a0f-429d-b365-48c9dbfeffcd",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "346fbcfc-95be-4b58-8b4b-4558ba4f4277",
+                "title": "Veeam Backup & Replication: Get Security & Compliance Analyzer Results",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "1788369e-1392-4cad-94ba-07a1013347c2",
+              "@type": "WorkflowStep",
+              "name": "Get Security Compliance Analyzer Results",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_security_compliance_analyzer_results",
+                "operationTitle": "Get Security & Compliance Analyzer Results"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d829b817-d9ad-4a98-a702-0eb3d10d2d7d",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Security Compliance Analyzer Results",
+              "sourceStep": "/api/3/workflow_steps/a1504f22-2a0f-429d-b365-48c9dbfeffcd",
+              "targetStep": "/api/3/workflow_steps/1788369e-1392-4cad-94ba-07a1013347c2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6b4ab7f2-a3d7-44b1-8012-ca069a324c1a",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Starts configuration backup.",
+          "name": "Start Configuration Backup",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/84098cd7-a131-496a-8d69-2b6b5c0c3728",
+          "steps": [
+            {
+              "uuid": "84098cd7-a131-496a-8d69-2b6b5c0c3728",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "5b5ca409-d218-4795-8bf5-b88760cf75e4",
+                "title": "Veeam Backup & Replication: Start Configuration Backup",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "51caa401-bded-4edf-ba80-5c68d55c78ec",
+              "@type": "WorkflowStep",
+              "name": "Start Configuration Backup",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "start_configuration_backup",
+                "operationTitle": "Start Configuration Backup"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "28163e18-2122-4fd1-a1b4-b4443c41802f",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Start Configuration Backup",
+              "sourceStep": "/api/3/workflow_steps/84098cd7-a131-496a-8d69-2b6b5c0c3728",
+              "targetStep": "/api/3/workflow_steps/51caa401-bded-4edf-ba80-5c68d55c78ec"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a594e10f-22d7-455f-b509-97404f3b01ee",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all servers that are added to the backup infrastructure based on the input parameters that you have specified. ",
+          "name": "Get Managed Server List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a5cd72a8-f87f-4f7e-abbb-2c31eaebed16",
+          "steps": [
+            {
+              "uuid": "a5cd72a8-f87f-4f7e-abbb-2c31eaebed16",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "82ccb761-9989-4bc3-ac53-c4e35d97ad3b",
+                "title": "Veeam Backup & Replication: Get Managed Server List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "09dc22f3-bf2c-42d9-9b9d-51e0eb16db35",
+              "@type": "WorkflowStep",
+              "name": "Get Managed Server List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Name",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_managed_server_list",
+                "operationTitle": "Get Managed Server List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "995a0847-e7dd-4243-8a88-eb3803d3d2fb",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Managed Server List",
+              "sourceStep": "/api/3/workflow_steps/a5cd72a8-f87f-4f7e-abbb-2c31eaebed16",
+              "targetStep": "/api/3/workflow_steps/09dc22f3-bf2c-42d9-9b9d-51e0eb16db35"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f1b973a5-3a71-4259-9165-6282af18500c",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Starts instant recovery of a VMware vSphere VM to VMware vSphere. You can recover a VM from the specified restore point to the original location with initial VM settings, or to any location but with different settings. ",
+          "name": "Start Instant Recovery",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/bb73d884-6e75-476e-b0b4-056744858108",
+          "steps": [
+            {
+              "uuid": "bb73d884-6e75-476e-b0b4-056744858108",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "400f7181-e6a3-44d2-8c25-6d3891786beb",
+                "title": "Veeam Backup & Replication: Start Instant Recovery",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "883cf8cc-42b9-4a3a-9a14-1ebf1132ae36",
+              "@type": "WorkflowStep",
+              "name": "Start Instant Recovery",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "antivirusScanEnabled": true,
+                  "vmTagsRestoreEnabled": true,
+                  "nicsEnabled": true,
+                  "powerUp": true
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "start_instant_recovery",
+                "operationTitle": "Start Instant Recovery"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c8d2235d-97a3-4eea-bfbe-b71c8bdcabad",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Start Instant Recovery",
+              "sourceStep": "/api/3/workflow_steps/bb73d884-6e75-476e-b0b4-056744858108",
+              "targetStep": "/api/3/workflow_steps/883cf8cc-42b9-4a3a-9a14-1ebf1132ae36"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d0797864-25c6-422a-a590-fe8c5a79a618",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Starts quick backup for the specified VMware vSphere or VMware Cloud Director VM.",
+          "name": "Start Quick Backup",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ece2dccc-b852-428f-ba6c-0ef08fbe5d10",
+          "steps": [
+            {
+              "uuid": "ece2dccc-b852-428f-ba6c-0ef08fbe5d10",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "19d5d9da-db11-4561-a20e-ce483a2fc589",
+                "title": "Veeam Backup & Replication: Start Quick Backup",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "ef44c142-c1ea-4553-a531-a57f80d58511",
+              "@type": "WorkflowStep",
+              "name": "Start Quick Backup",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "start_quick_backup",
+                "operationTitle": "Start Quick Backup"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5e530b0a-d25e-4960-897d-0ce239b15c67",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Start Quick Backup",
+              "sourceStep": "/api/3/workflow_steps/ece2dccc-b852-428f-ba6c-0ef08fbe5d10",
+              "targetStep": "/api/3/workflow_steps/ef44c142-c1ea-4553-a531-a57f80d58511"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "821a19b7-0bcb-478a-bc67-ffa2e983c410",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all backups that are created on or imported to the backup server based on the input parameters that you have specified. ",
+          "name": "Get Backup List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0c1e6666-60ef-4eee-96c0-30ffde6a2d55",
+          "steps": [
+            {
+              "uuid": "0c1e6666-60ef-4eee-96c0-30ffde6a2d55",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "3eab8ed2-83c1-4253-bb1a-846e5399d90d",
+                "title": "Veeam Backup & Replication: Get Backup List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "cfd2cf5a-546a-4a2a-a1eb-fe9a0dcf1b4a",
+              "@type": "WorkflowStep",
+              "name": "Get Backup List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Name",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_backup_list",
+                "operationTitle": "Get Backup List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "78d4a9a9-0a33-40e0-8f0a-0df43b8166e0",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Backup List",
+              "sourceStep": "/api/3/workflow_steps/0c1e6666-60ef-4eee-96c0-30ffde6a2d55",
+              "targetStep": "/api/3/workflow_steps/cfd2cf5a-546a-4a2a-a1eb-fe9a0dcf1b4a"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "5b4b7dcb-a302-402e-9ce8-10f49b7dedc7",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all repository states. The states include repository location and brief statistics, such as repository capacity, free and used space based on the input parameters that you have specified. ",
+          "name": "Get Repository State List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/573798a7-dd25-4ca9-9252-f1c805c4b38c",
+          "steps": [
+            {
+              "uuid": "573798a7-dd25-4ca9-9252-f1c805c4b38c",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "f5b120c2-ccd6-4a38-88c5-c9056c7a3090",
+                "title": "Veeam Backup & Replication: Get Repository State List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "fc9a7528-2765-45c1-a29d-933e8c91e771",
+              "@type": "WorkflowStep",
+              "name": "Get Repository State List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "isOnlineFilter": true,
+                  "orderColumn": "Name",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_repository_state_list",
+                "operationTitle": "Get Repository State List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1e2e4858-c64d-4072-aba2-db035883955b",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Repository State List",
+              "sourceStep": "/api/3/workflow_steps/573798a7-dd25-4ca9-9252-f1c805c4b38c",
+              "targetStep": "/api/3/workflow_steps/fc9a7528-2765-45c1-a29d-933e8c91e771"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "70843de9-7002-4864-a91f-ac66103a1da1",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all restore points created on the backup server based on the input parameters that you have specified. ",
+          "name": "Get Restore Point List",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5a8de348-caa9-4a6d-ae37-475776f6e650",
+          "steps": [
+            {
+              "uuid": "5a8de348-caa9-4a6d-ae37-475776f6e650",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "6beeff11-e7e3-4089-bf12-a04fa2156c24",
+                "title": "Veeam Backup & Replication: Get Restore Point List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "daceb008-98c0-4987-a702-4ec7e9751c7f",
+              "@type": "WorkflowStep",
+              "name": "Get Restore Point List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": {
+                  "orderColumn": "Creation Time",
+                  "orderAsc": true,
+                  "skip": 0,
+                  "limit": 50
+                },
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "get_restore_point_list",
+                "operationTitle": "Get Restore Point List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "aabf72e8-6368-4235-8c49-f670a3499fb1",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Restore Point List",
+              "sourceStep": "/api/3/workflow_steps/5a8de348-caa9-4a6d-ae37-475776f6e650",
+              "targetStep": "/api/3/workflow_steps/daceb008-98c0-4987-a702-4ec7e9751c7f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6f761edf-b06b-46af-919b-2aee29e77c55",
+          "collection": "/api/3/workflow_collections/a2194e5c-41c0-4c94-be07-6421c49ebe37",
+          "triggerLimit": null,
+          "description": "Sends an API request to any Veeam Backup & Replication API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs. ",
+          "name": "Execute an API Request",
+          "tag": "#Veeam Backup & Replication",
+          "recordTags": [
+            "Veeam",
+            "veeam-backup-replication"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/fa019247-71dc-4d79-8e80-c77fecdb161d",
+          "steps": [
+            {
+              "uuid": "fa019247-71dc-4d79-8e80-c77fecdb161d",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "f40807f9-86d7-4ce1-b81c-a9fd2e7b5dc0",
+                "title": "Veeam Backup & Replication: Execute an API Request",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "7231629b-390c-4e06-8637-5c52088c1850",
+              "@type": "WorkflowStep",
+              "name": "Execute an API Request",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Veeam Backup & Replication",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "veeam-backup-replication",
+                "operation": "execute_an_api_request",
+                "operationTitle": "Execute an API Request"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "418f7256-4291-44d2-b435-913cc2f11e9b",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Execute an API Request",
+              "sourceStep": "/api/3/workflow_steps/fa019247-71dc-4d79-8e80-c77fecdb161d",
+              "targetStep": "/api/3/workflow_steps/7231629b-390c-4e06-8637-5c52088c1850"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
