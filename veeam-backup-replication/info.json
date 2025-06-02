@@ -513,7 +513,7 @@
           "description": "Select the detection date and time, in UTC."
         },
         {
-          "title": "Machine",
+          "title": "Machine Details",
           "name": "machine",
           "type": "json",
           "value": {
@@ -529,7 +529,7 @@
           "visible": true
         },
         {
-          "title": "Details",
+          "title": "Description",
           "name": "details",
           "type": "text",
           "tooltip": "Specify the event description.",
@@ -1058,7 +1058,7 @@
           "onchange": {
             "true" : [
               {
-                "title": "virusDetectionAction",
+                "title": "Virus Detection Action",
                 "name": "virusDetectionAction",
                 "type": "select",
                 "options": [
