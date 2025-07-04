@@ -83,7 +83,26 @@
       "description": "Retrieves a list of all servers and hosts added to the backup infrastructure based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_server_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "urn": "",
+            "name": "",
+            "size": "",
+            "type": "",
+            "hostName": "",
+            "objectId": "",
+            "platform": ""
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        },
+        "hierarchyType": ""
+      },
       "parameters": [
         {
           "title": "Filter Mode",
@@ -266,6 +285,24 @@
                 "title": "Filter",
                 "name": "filter",
                 "type": "json",
+                "value": {
+                  "type": "GroupExpression",
+                  "operation": "and",
+                  "items": [
+                    {
+                      "type": "PredicateExpression",
+                      "operation": "endsWith",
+                      "property": "hostName",
+                      "value": "amust.local"
+                    },
+                    {
+                      "type": "PredicateExpression",
+                      "operation": "equals",
+                      "property": "Type",
+                      "value": "vCenterServer"
+                    }
+                  ]
+                },
                 "tooltip": "Specify a filter, in JSON format, to return only results that match the given criteria.",
                 "description": "Specify a filter, in JSON format, to return only results that match the given criteria.",
                 "required": true,
@@ -362,7 +399,26 @@
       "description": "Retrieves a list of all unstructured data servers available on a backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_unstructured_data_server_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "type": "",
+            "name": "",
+            "hostId": "",
+            "processing": {
+              "cacheRepositoryId": "",
+              "backupIOControlLevel": ""
+            }
+          }
+        ],
+        "pagination": {
+          "total": "",
+          "count": "",
+          "skip": "",
+          "limit": ""
+        }
+      },
       "parameters": [
         {
           "title": "Name Filter",
@@ -431,7 +487,32 @@
       "description": "Retrieves a list of all Microsoft Entra ID tenants added to the backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_microsoft_entra_id_tenant_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "azureTenantId": "",
+            "description": "",
+            "cacheRepositoryId": "",
+            "region": "",
+            "authentication": {
+              "applicationId": "",
+              "secret": "",
+              "certificate": {
+                "certificate": "",
+                "formatType": "",
+                "password": ""
+              }
+            }
+          }
+        ],
+        "pagination": {
+          "total": "",
+          "count": "",
+          "skip": "",
+          "limit": ""
+        }
+      },
       "parameters": [
         {
           "title": "Name Filter",
@@ -500,7 +581,32 @@
       "description": "Creates a new malware event based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "create_malware_event",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "type": "",
+            "state": "",
+            "engine": "",
+            "source": "",
+            "details": "",
+            "machine": {
+              "uuid": "",
+              "displayName": "",
+              "backupObjectId": ""
+            },
+            "severity": "",
+            "createdBy": "",
+            "detectionTimeUtc": ""
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        }
+      },
       "parameters": [
         {
           "title": "Detection Time",
@@ -557,7 +663,32 @@
       "description": "Retrieves a list of all malware events created on the backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_malware_event_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "type": "",
+            "state": "",
+            "engine": "",
+            "source": "",
+            "details": "",
+            "machine": {
+              "uuid": "",
+              "displayName": "",
+              "backupObjectId": ""
+            },
+            "severity": "",
+            "createdBy": "",
+            "detectionTimeUtc": ""
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        }
+      },
       "parameters": [
         {
           "title": "Start Time",
@@ -738,7 +869,23 @@
       "description": "Scans backups with antivirus or YARA rules based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "scan_backup",
-      "output_schema": {},
+      "output_schema": {
+        "sessionType": "",
+        "state": "",
+        "platformName": "",
+        "id": "",
+        "name": "",
+        "jobId": "",
+        "creationTime": "",
+        "endTime": "",
+        "progressPercent": "",
+        "result": "",
+        "resourceId": "",
+        "resourceReference": "",
+        "parentSessionId": "",
+        "usn": "",
+        "platformId": ""
+      },
       "parameters": [
         {
           "title": "Backup ID",
@@ -858,7 +1005,27 @@
       "description": "Starts security & compliance analyzer on the backup server. ",
       "category": "investigation",
       "annotation": "start_security_compliance_analyzer",
-      "output_schema": {},
+      "output_schema": {
+        "id": "",
+        "usn": "",
+        "name": "",
+        "jobId": "",
+        "state": "",
+        "result": {
+          "result": "",
+          "message": "",
+          "isCanceled": ""
+        },
+        "endTime": "",
+        "platformId": "",
+        "resourceId": "",
+        "sessionType": "",
+        "creationTime": "",
+        "platformName": "",
+        "parentSessionId": "",
+        "progressPercent": "",
+        "resourceReference": ""
+      },
       "parameters": [],
       "enabled": true
     },
@@ -868,7 +1035,16 @@
       "description": "Retrieves best practices compliance result from the backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_security_compliance_analyzer_results",
-      "output_schema": {},
+      "output_schema": {
+        "items": [
+          {
+            "id": "",
+            "note": "",
+            "status": "",
+            "bestPractice": ""
+          }
+        ]
+      },
       "parameters": [],
       "enabled": true
     },
@@ -878,7 +1054,27 @@
       "description": "Starts configuration backup.",
       "category": "investigation",
       "annotation": "start_configuration_backup",
-      "output_schema": {},
+      "output_schema": {
+        "id": "",
+        "usn": "",
+        "name": "",
+        "jobId": "",
+        "state": "",
+        "result": {
+          "result": "",
+          "message": "",
+          "isCanceled": ""
+        },
+        "endTime": "",
+        "platformId": "",
+        "resourceId": "",
+        "sessionType": "",
+        "creationTime": "",
+        "platformName": "",
+        "parentSessionId": "",
+        "progressPercent": "",
+        "resourceReference": ""
+      },
       "parameters": [],
       "enabled": true
     },
@@ -888,7 +1084,45 @@
       "description": "Retrieves a list of all servers that are added to the backup infrastructure based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_managed_server_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "port": "",
+            "type": "",
+            "status": "",
+            "viHostType": "",
+            "description": "",
+            "credentialsId": ""
+          },
+          {
+            "id": "",
+            "name": "",
+            "type": "",
+            "status": "",
+            "description": "",
+            "credentialsId": "",
+            "networkSettings": {
+              "components": [
+                {
+                  "port": "",
+                  "componentName": ""
+                }
+              ],
+              "serverSide": "",
+              "portRangeEnd": "",
+              "portRangeStart": ""
+            }
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        }
+      },
       "parameters": [
         {
           "title": "Name Filter",
@@ -989,7 +1223,25 @@
       "description": "Starts instant recovery of a VMware vSphere VM to VMware vSphere. You can recover a VM from the specified restore point to the original location with initial VM settings, or to any location but with different settings. ",
       "category": "investigation",
       "annotation": "start_instant_recovery",
-      "output_schema": {},
+      "output_schema": {
+        "sessionType": "",
+        "state": "",
+        "id": "",
+        "name": "",
+        "jobId": "",
+        "creationTime": "",
+        "endTime": "",
+        "progressPercent": "",
+        "result": {
+          "result": "",
+          "message": "",
+          "isCanceled": ""
+        },
+        "resourceId": "",
+        "resourceReference": "",
+        "parentSessionId": "",
+        "usn": ""
+      },
       "parameters": [
         {
           "title": "Restore Point ID",
@@ -1143,7 +1395,27 @@
       "description": "Starts quick backup for the specified VMware vSphere or VMware Cloud Director VM.",
       "category": "investigation",
       "annotation": "start_quick_backup",
-      "output_schema": {},
+      "output_schema": {
+        "sessionType": "",
+        "state": "",
+        "platformName": "",
+        "id": "",
+        "name": "",
+        "jobId": "",
+        "creationTime": "",
+        "endTime": "",
+        "progressPercent": "",
+        "result": {
+          "result": "",
+          "message": "",
+          "isCanceled": ""
+        },
+        "resourceId": "",
+        "resourceReference": "",
+        "parentSessionId": "",
+        "usn": "",
+        "platformId": ""
+      },
       "parameters": [
         {
           "title": "Platform",
@@ -1308,7 +1580,26 @@
       "description": "Retrieves a list of all backups that are created on or imported to the backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_backup_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "jobId": "",
+            "platformId": "",
+            "creationTime": "",
+            "platformName": "",
+            "repositoryId": "",
+            "policyUniqueId": ""
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        }
+      },
       "parameters": [
         {
           "title": "Name Filter",
@@ -1430,7 +1721,29 @@
       "description": "Retrieves a list of all repository states. The states include repository location and brief statistics, such as repository capacity, free and used space based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_repository_state_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+            {
+              "type": "",
+              "id": "",
+              "name": "",
+              "description": "",
+              "hostId": "",
+              "hostName": "",
+              "path": "",
+              "capacityGB": "",
+              "freeGB": "",
+              "usedSpaceGB": "",
+              "isOnline": ""
+            }
+        ],
+        "pagination": {
+          "total": "",
+          "count": "",
+          "skip": "",
+          "limit": ""
+        }
+      },
       "parameters": [
         {
           "title": "Repository ID",
@@ -1590,7 +1903,29 @@
       "description": "Retrieves a list of all restore points created on the backup server based on the input parameters that you have specified. ",
       "category": "investigation",
       "annotation": "get_restore_point_list",
-      "output_schema": {},
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "type": "",
+            "backupId": "",
+            "sessionId": "",
+            "platformId": "",
+            "backupFileId": "",
+            "creationTime": "",
+            "platformName": "",
+            "malwareStatus": "",
+            "allowedOperations": []
+          }
+        ],
+        "pagination": {
+          "skip": "",
+          "count": "",
+          "limit": "",
+          "total": ""
+        }
+      },
       "parameters": [
         {
           "title": "Name Filter",

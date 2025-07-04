@@ -234,12 +234,13 @@ def scan_backup(config, params):
         "scanEngine": {
             "useAntivirusEngine": "Antivirus Engine" in scan_engine,
             "useYaraRule": "YARA Rule" in scan_engine
-            ** (
-               {"yaraRule": {"fileName": params.pop('fileName')}}
-               if "YARA Rule" in scan_engine else {}
-            )
         }
     }
+    # Conditionally add yaraRule if needed
+    if "YARA Rule" in scan_engine:
+        payload["scanEngine"]["yaraRule"] = {
+            "fileName": params.pop('fileName')
+        }
     if params.pop('scanRange', ''):
         payload['scanRange'] = {"from": params.pop('from'), "to": params.pop('to')}
     payload.update(params)
@@ -281,23 +282,25 @@ def start_instant_recovery(config, params):
         "type": restore_type,
         "vmTagsRestoreEnabled": params.pop('vmTagsRestoreEnabled', True),
         "secureRestore": {
-            "antivirusScanEnabled": enable_av,
-            **(
-                {"virusDetectionAction": virus_detection_action.get(params.pop('virusDetectionAction')),
-                 "entireVolumeScanEnabled": params.pop('entireVolumeScanEnabled', True)}
-                if enable_av else {}
-            )
+            "antivirusScanEnabled": enable_av
         },
         "nicsEnabled": params.pop('nicsEnabled', True),
         "powerUp": params.pop('powerUp', True),
         "reason": params.pop('reason', '')
-        ** (
-          {"datastore": params.pop('datastore'),
-           "destination": params.pop('destination', {}),
-           "overwrite": params.pop('overwrite', False)}
-          if restore_type == 'Customized' else {}
-        )
     }
+    # Conditionally extend secureRestore
+    if enable_av:
+        payload["secureRestore"].update({
+            "virusDetectionAction": virus_detection_action.get(params.pop('virusDetectionAction')),
+            "entireVolumeScanEnabled": params.pop('entireVolumeScanEnabled', True)
+        })
+    # Conditionally extend top-level payload
+    if restore_type == 'Customized':
+        payload.update({
+            "datastore": params.pop('datastore'),
+            "destination": params.pop('destination', {}),
+            "overwrite": params.pop('overwrite', False)
+        })
     return vdp.make_rest_call(config, endpoint='restore/instantRecovery/vSphere/vm', json_body=payload, method='POST')
 
 
